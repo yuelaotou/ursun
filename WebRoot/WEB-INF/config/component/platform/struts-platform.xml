@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"D:\projects\neusipo_v2.0\platform\struts-2.0.dtd">
+
+<struts>
+	<package name="platform" extends="wee-default" namespace="/platform">
+		<action name="login_point">
+			<result>/platform/framework/page/login.jsp</result>
+		</action>
+
+		<action name="logout">
+			<result>/platform/framework/page/login.jsp</result>
+		</action>
+
+		<action name="login" class="cn.ursun.platform.ps.login.action.LoginAC">
+			<result>/platform/framework/page/system.jsp</result>
+			<result name="error">/platform/framework/page/login.jsp</result>
+		</action>
+		<action name="main" class="cn.ursun.platform.ps.framework.main.action.MainAC">
+			<result name="collection">/platform/framework/page/main.jsp</result>
+			<result name="demo">/platform/framework/page/main.jsp</result>
+			<result name="console">/platform/framework/page/main.jsp</result>
+		</action>
+		<action name="header" class="cn.ursun.platform.ps.framework.header.action.HeaderAC">
+			<result>/platform/framework/page/header.jsp</result>
+		</action>
+	</package>
+
+</struts>

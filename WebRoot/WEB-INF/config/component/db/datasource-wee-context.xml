@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:wee-datasource.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="platformDataSource"
+		class="com.atomikos.jdbc.AtomikosDataSourceBean" init-method="init"
+		destroy-method="close">
+		<property name="uniqueResourceName">
+			<value>platformDataSource</value>
+		</property>
+		<property name="xaDataSourceClassName">
+			<value>oracle.jdbc.xa.client.OracleXADataSource</value>
+		</property>
+		<property name="xaProperties">
+			<props>
+				<prop key="user">${platform.supportdb.username}</prop>
+				<prop key="password">${platform.supportdb.password}</prop>
+				<prop key="URL">${platform.supportdb.url}</prop>
+			</props>
+		</property>
+		<property name="maxPoolSize">
+			<value>5</value>
+		</property>
+		<property name="minPoolSize">
+			<value>2</value>
+		</property>
+	</bean>
+	
+</beans>

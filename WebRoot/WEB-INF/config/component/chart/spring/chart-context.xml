@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	<aop:aspectj-autoproxy />
+	<bean id="chartFactory"
+		class="cn.ursun.platform.ps.report.chart.ChartFactory">
+	   <property name="maps">  
+	       <map>  
+		         <entry key="COLUMN_2D">
+			         <bean id="column2d"
+						class="cn.ursun.platform.ps.report.chart.impl.Column">
+			         </bean>  
+		         </entry>
+		         <entry key="BAR_2D">
+			         <bean id="bar2d"
+						class="cn.ursun.platform.ps.report.chart.impl.Column">
+			         </bean>  
+		         </entry>
+		         <entry key="MSBAR_2D">
+			         <bean id="mabar2d"
+						class="cn.ursun.platform.ps.report.chart.impl.MSColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="COLUMN_3D">
+			         <bean id="column3d"
+						class="cn.ursun.platform.ps.report.chart.impl.Column">
+			         </bean>  
+		         </entry>
+		          <entry key="MSCOLUMN_3D">
+			         <bean id="mscolumn3d"
+						class="cn.ursun.platform.ps.report.chart.impl.MSColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="MSBAR_3D">
+			         <bean id="msbar3d"
+						class="cn.ursun.platform.ps.report.chart.impl.MSColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="COMBIN_BAR">
+			         <bean id="combin"
+						class="cn.ursun.platform.ps.report.chart.impl.MSCombi">
+			         </bean>  
+		         </entry>
+		         <entry key="PIE_2D">
+			         <bean id="pie2d"
+						class="cn.ursun.platform.ps.report.chart.impl.Pie">
+			         </bean>  
+		         </entry>
+		         
+		         <entry key="PIE_3D">
+			         <bean id="pie3d"
+						class="cn.ursun.platform.ps.report.chart.impl.Pie">
+			         </bean>  
+		         </entry>
+		         <entry key="LINE_2D">
+			         <bean id="line2d"
+						class="cn.ursun.platform.ps.report.chart.impl.Column">
+			         </bean>  
+		         </entry>
+		         <entry key="MSLINE_2D">
+			         <bean id="msline2d"
+						class="cn.ursun.platform.ps.report.chart.impl.MSLine">
+			         </bean>  
+		         </entry>
+		         <entry key="LINE_3D">
+			         <bean id="line3d"
+						class="cn.ursun.platform.ps.report.chart.impl.MSConbinLine">
+			         </bean>  
+		         </entry>
+		         <entry key="STACKEDCOLUMN_2D">
+			         <bean id="stackedcolumn2d"
+						class="cn.ursun.platform.ps.report.chart.impl.StackedColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="STACKEDBAR_2D">
+			         <bean id="stackbar2d"
+						class="cn.ursun.platform.ps.report.chart.impl.StackedColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="STACKEDCOLUMN_3D">
+			         <bean id="stackedcolumn3d"
+						class="cn.ursun.platform.ps.report.chart.impl.StackedColumn">
+			         </bean>  
+		         </entry>
+		         
+		         <entry key="STACKEDBAR_3D">
+			         <bean id="stackedbar3d"
+						class="cn.ursun.platform.ps.report.chart.impl.StackedColumn">
+			         </bean>  
+		         </entry>
+		         <entry key="XYLine">
+			         <bean id="xyline"
+						class="cn.ursun.platform.ps.report.chart.impl.XYLine">
+			         </bean>  
+		         </entry>
+		   </map>  
+   		</property>  
+	</bean>
+	</beans>

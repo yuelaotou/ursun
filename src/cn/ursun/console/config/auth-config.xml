@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 权限管理 配置文件 -->
+<auth-config>
+	<!-- 
+	index:页面元素排序索引 
+	name:数据库大字段中保存的xml节点名称
+	label:显示在页面的输入项名称
+	type:页面元素的类型(text|radio|checkbox|date....)
+	minlength:允许输入的最小长度
+	maxlength:允许输入的最大长度
+	format:输入内容的格式
+	require:是否必填项
+	isquery:是否作为列表查询条件.当为true时,必须配置operate
+	operate:查询方式(like,=,>,<)
+	tableName:关联的数据库字典表名称
+	codeName:字典表作为值的字段
+	codeValue:字典表作为显示名称的字段
+	filterName:查询字典表的过滤字段
+	filterValue:查询字典表的过滤值
+	relateColumn:依赖的column,如省份province的内容依赖与国家的值,那么relateColumn="country"
+	multiple:下拉列表是否多选
+	-->
+	<user-extend-info>
+		<column index="1" name="cardKey" label="身份证号" type="icard"  format=""
+			require="">
+		</column>
+		<column index="2" name="mobileKey" label="手机号码" type="telephone" minlength="0" maxlength="40" format=""
+			require="">
+		</column>
+		<column index="3" name="comKey" label="公司" type="text" minlength="0" maxlength="40" format=""
+			require="" isquery="true" operate="like">
+		</column>
+		<column index="4" name="comTelKey" label="公司电话" type="telephone" minlength="0" maxlength="40" format=""
+			require="">
+		</column>
+		<column index="5" name="faxTelKey" label="传真" type="telephone" minlength="0" maxlength="40" format=""
+			require="">
+		</column>
+		<!--  
+		<column index="6" name="countryKey" label="国家" type="dict" tableName="WEE_CITY_CODE" codeName="AREA_CODE"
+			codeValue="AREA_NAME" filterName="parent_id" multiple="false" require="true">
+		</column>
+		
+		<column index="7" name="provinceKey" label="省份/地区" type="dict" tableName="WEE_CITY_CODE" codeName="AREA_CODE"
+			codeValue="AREA_NAME" relateColumn="countryKey" filterName="parent_id" multiple="false" require="true">
+		</column>
+		<column index="8" name="cityKey" label="城市" type="dict" tableName="WEE_CITY_CODE" codeName="AREA_CODE"
+			codeValue="AREA_NAME" relateColumn="provinceKey" filterName="parent_id" multiple="false" require="true">
+		</column>
+		-->
+		<column index="9" name="addressKey" label="住址" type="text" minlength="0" maxlength="100" format=""
+			require="">
+		</column>
+		<column index="10" name="zipKey" label="邮政编码" type="number" minlength="0" maxlength="6" format=""
+			require="">
+		</column>
+	</user-extend-info>
+</auth-config>

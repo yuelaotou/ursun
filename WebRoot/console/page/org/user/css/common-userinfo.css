@@ -1,0 +1,34 @@
+/* CSS Document */
+
+body, tr, td, page {
+	font-family:Tahoma, "ËÎÌו";
+	text-align: left;
+	font-size: 12px;
+	background-color:#FFFFFF;
+}
+
+table.outter_userinfo {
+	width: 40%;
+}
+
+table.outter_userinfo tr td {
+	background-color: #330099;
+}
+
+table.inner_userinfo {
+	width: 100%;
+}
+
+table.inner_userinfo tr th {
+	background-color: #EEE;
+	font-size: 12px;
+}
+
+table.inner_userinfo tr.odd_userinfo td {
+	background-color: #FFF;
+}
+
+table.inner_userinfo tr.even_userinfo td {
+	background-color: #EEE;
+}/* CSS Document */
+

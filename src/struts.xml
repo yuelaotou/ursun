@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- Wee MultiPartRequest 解决上传文件时大小限制异常的捕获处理 -->
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="wee"
+		class="cn.ursun.platform.core.upload.WeeMultiPartRequest" scope="default" optional="true" />
+	<package name="wee-default" extends="struts-default">
+		<result-types>
+			<!-- 添加的自定义类型JSON对象 -->
+			<result-type name="json" class="com.googlecode.jsonplugin.JSONResult" />
+			<!-- 添加的自定义类型execAndWaitJSON对象 -->
+			<result-type name="execAndWaitJSON" class="com.googlecode.jsonplugin.ExecuteAndWaitJSONResult" />
+		</result-types>
+		<interceptors>
+			<!-- 修改ExceptionInterceptor 处理Ajax提交后的错误情况  -->
+			<interceptor name="weeException" class="cn.ursun.platform.ps.interceptor.WeeExceptionMappingInterceptor" />
+			<!-- Wee 处理 fileUpload 时将给出更加详细的错误信息  -->
+			<interceptor name="weeFileUpload" class="cn.ursun.platform.ps.interceptor.WeeFileUploadInterceptor" />
+			<!-- 修改 parameterInterceptor 处理传递的JSON数据，映射到Action中 -->
+			<interceptor name="weeParams" class="cn.ursun.platform.ps.interceptor.WeeParametersInterceptor" />
+			<!-- 记录Action执行时间 -->
+			<interceptor name="weeTimer" class="cn.ursun.platform.ps.interceptor.WeeActionTimerInterceptor" />
+			<!-- 业务日志上下文对象信息 -->
+			<interceptor name="clientInfoContext" class="cn.ursun.platform.ps.interceptor.ClientInfoContextInterceptor" />
+			<interceptor name="weeExecAndWait" class="cn.ursun.platform.ps.interceptor.WeeExecuteAndWaitInterceptor" />
+
+
+			<!-- Wee 使用的 Action 拦截栈 -->
+			<interceptor-stack name="weeStack">
+				<!-- 添加 servletConfig 拦截器 -->
+				<interceptor-ref name="weeTimer" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="autowiring" />
+				<interceptor-ref name="createSession" />
+				<interceptor-ref name="weeException" />
+				<interceptor-ref name="weeFileUpload" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="clientInfoContext" />
+				<interceptor-ref name="weeParams" />
+			</interceptor-stack>
+
+
+		</interceptors>
+
+		<default-interceptor-ref name="weeStack" />
+
+		<!-- 全局的result -->
+		<global-results>
+			<result name="jsonResult" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="defaultEncoding">UTF-8</param>
+			</result>
+			<result name="waitJsonResult" type="execAndWaitJSON">
+				<param name="enableGZIP">true</param>
+				<param name="defaultEncoding">UTF-8</param>
+			</result>
+			<result name="wait" type="execAndWaitJSON">
+				<param name="enableGZIP">true</param>
+				<param name="defaultEncoding">UTF-8</param>
+			</result>
+			<result name="global_error">/platform/common/page/errors.jsp</result>
+			<result name="ajax_error" type="json"></result>
+		</global-results>
+
+		<!-- 异常处理的拦截器 -->
+		<global-exception-mappings>
+			<exception-mapping exception="cn.ursun.platform.ps.exception.AjaxException" result="ajax_error" />
+			<exception-mapping exception="cn.ursun.platform.ps.exception.SystemException" result="error" />
+			<exception-mapping exception="cn.ursun.platform.ps.exception.BizException" result="error" />
+		</global-exception-mappings>
+	</package>
+
+</struts>

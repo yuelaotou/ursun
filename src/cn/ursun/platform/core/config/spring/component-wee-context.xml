@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 组件初始化器，负责将系统中所有 Component 接口的组件进行初始化 -->
+	<bean id="componentInitializer" init-method="init"
+		class="cn.ursun.platform.core.component.ComponentInitializer"
+		destroy-method="destory">
+	</bean>
+	
+	<bean id="componentInitializerProxy" class="cn.ursun.platform.core.component.ComponentInitializerProxy">
+		<property name="proxy" ref="componentInitializer" />
+	</bean>
+
+</beans>

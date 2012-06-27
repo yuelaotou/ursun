@@ -1,0 +1,144 @@
+.window {
+	position: absolute;
+	left: 200px;
+	top: 100px;
+	width: 412px;
+	overflow: hidden;
+	display: none;
+	border-bottom: 1px solid #CCC; 
+}
+
+.windowTop {
+	height: 32px;
+	overflow: 32px;
+	background-image: url(../images/window/window_top_end.gif);
+	background-position: right top;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
+	cursor: move;
+	border-bottom: 1px solid #ccc;
+}
+.windowFooter {
+	height: 30px;
+	background-color:#f7f7f7;
+	position: relative;
+	overflow: hidden;
+	border-left: 1px solid #CCC; 
+	border-right: 1px solid #CCC; 
+	border-bottom: 1px solid #CCC; 
+	text-align:center;
+}
+.windowTopContent {
+	margin-right: 13px;
+	background-image: url(../images/window/window_top_start.gif);
+	background-position: left top;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	height: 32px;
+	line-height: 32px;
+	text-indent: 20px;
+	font-weight: bold;
+	color: #2c6d9e;
+	overflow:auto;
+}
+
+.windowMin {
+	position: absolute;
+	right: 25px;
+	top: 10px;
+	cursor: pointer;
+}
+
+.windowMax {
+	position: absolute;
+	right: 25px;
+	top: 10px;
+	cursor: pointer;
+	display: none;
+}
+
+.windowCloseButton {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width:18px;
+	height:14px;
+	cursor: pointer;
+	background-position: right;
+	background-image:url(../images/window/window_close.gif);
+	background-repeat: no-repeat;
+}
+
+.windowBody {
+	position: relative;
+	height: 140px;
+	background-image: url(../images/window/window_bottom_end.gif);
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+.windowContent {
+	position: relative;
+	height: 140px;
+	overflow:auto;
+	background: url(../images/window/window_bottom_start.gif);
+	background-repeat: no-repeat;
+	margin-right: 1px;
+}
+
+#windowResize {
+	position: absolute;
+	right: 3px;
+	bottom: 5px;
+	cursor: se-resize;
+}
+
+
+
+
+.transferer2 {
+	border: 1px solid #6BAF04;
+	background-color: #ccc;
+	filter: alpha(opacity = 30);
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+}
+
+/*tranlate_two*/
+.tranlate_two_left {
+	width: 14px;
+	height: 166px;
+	background: url(../images/window/tranlate_two_left.gif) no-repeat;
+	float: left;
+}
+
+.tranlate_two_conter {
+	width: 382px;
+	height: 166px;
+	background: url(../images/window/tranlate_two_conter.gif);
+	float: left;
+}
+
+.tranlate_two_di {
+	width: 14px;
+	height: 166px;
+	background: url(../images/window/tranlate_two_di.gif) no-repeat;
+	float: left;
+}
+
+.tranlate_list {
+	text-align: center;
+	padding-top: 30px;
+}
+
+.tranlate_list select {
+	width: 260px;
+	height: 20px;
+}
+
+.tranlate_list input {
+	width: 256px;
+	height: 20px;
+	line-height: 20px;
+}

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 维护用户信息 begin -->
+	<bean id="sysmgr.userBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.userBS" lazy-init="true"
+				class="cn.ursun.console.app.console.user.bizservice.impl.UserBSImpl">
+				<property name="userDAO">
+					<ref bean="sysmgr.userDAO" />
+				</property>
+				<property name="accountDAO">
+					<ref bean="sysmgr.accountDAO" />
+				</property>
+				<property name="unitDAO">
+					<ref bean="sysmgr.unitDAO" />
+				</property>
+				<property name="roleDAO">
+					<ref bean="sysmgr.roleDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="sysmgr.unitBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.unitBS" lazy-init="true"
+				class="cn.ursun.console.app.console.unit.bizservice.impl.UnitBSImpl">
+				<property name="unitDAO">
+					<ref bean="sysmgr.unitDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 维护用户信息 end -->
+	<!-- 维护角色信息 end -->
+	<bean id="sysmgr.roleBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.roleBS" lazy-init="true"
+				class="cn.ursun.console.app.console.role.bizservice.impl.RoleBSImpl">
+				<property name="roleDAO">
+					<ref bean="sysmgr.roleDAO" />
+				</property>
+				<property name="userDAO">
+					<ref bean="sysmgr.userDAO" />
+				</property>
+				<property name="privilegeDAO">
+					<ref bean="sysmgr.privilegeDAO" />
+				</property>
+			</bean>
+
+		</property>
+	</bean>
+	<!-- 维护角色信息 end -->
+	<!-- 维护资源信息  begin -->
+	<bean id="sysmgr.resourceBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.resourceBS" lazy-init="true"
+				class="cn.ursun.console.app.console.resource.bizservice.impl.ResourceBSImpl">
+				<property name="resourceDao">
+					<ref bean="sysmgr.resourceDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 维护资源信息 end -->
+
+	<!-- 维护权限信息 begin -->
+	<bean id="sysmgr.privilegeBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.privilegeBS" lazy-init="true"
+				class="cn.ursun.console.app.console.privilege.bizservice.impl.PrivilegeBSImpl">
+				<property name="roleDAO">
+					<ref bean="sysmgr.roleDAO" />
+				</property>
+				<property name="resourceDAO">
+					<ref bean="sysmgr.resourceDAO" />
+				</property>
+				<property name="privilegeDAO">
+					<ref bean="sysmgr.privilegeDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 维护权限信息 end -->
+	<!-- 菜单维护配置 begin-->
+	<bean id="sysmgr.menuBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.menuBS" lazy-init="true"
+				class="cn.ursun.console.app.console.menu.bizservice.impl.MenuBSImpl">
+				<property name="menuDAO">
+					<ref bean="sysmgr.menuDAO" />
+				</property>
+				<property name="resourceDAO">
+					<ref bean="sysmgr.resourceDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 菜单维护配置 end-->
+	
+	<!-- 用户操作日志 begin-->
+	<bean id="sysmgr.bizlogBSTrans" parent="baseTxProxy">
+		<!-- target属性为固定的，值为对应的BS bean -->
+		<property name="target">
+			<bean id="sysmgr.bizlogBS" lazy-init="true"
+				class="cn.ursun.console.app.console.bizlog.bizservice.impl.BizLogBSImpl">
+				<property name="bizlogDAO">
+					<ref bean="sysmgr.bizlogDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 用户操作日志 end-->
+
+	<bean id="authFacdeFactory"
+		class="cn.ursun.console.app.console.facade.AuthFacedImpl"
+		factory-method="getInstance">
+		<property name="accountDAO" ref="sysmgr.accountDAO" />
+		<property name="userDAO" ref="sysmgr.userDAO" />
+		<property name="unitDAO" ref="sysmgr.unitDAO" />
+		<property name="resourceDAO" ref="sysmgr.resourceDAO" />
+		<property name="privilegeDAO" ref="sysmgr.privilegeDAO" />
+		<property name="roleDAO" ref="sysmgr.roleDAO" />
+		<property name="menuDAO" ref="sysmgr.menuDAO" />
+		<property name="roleBS" ref="sysmgr.roleBSTrans" />
+		<property name="unitBS" ref="sysmgr.unitBSTrans" />
+	</bean>
+	
+	<bean id="authConfigComponent"
+		class="cn.ursun.console.app.console.configloader.AuthConfigLoader">
+		<property name="authConfigResource">
+			<value>classpath:cn/ursun/console/config/auth-config.xml</value>
+		</property>
+	</bean>
+	
+	<bean parent="componentInitializerProxy">
+		<property name="componentList">
+			<list>
+				<ref bean="authConfigComponent" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+	"D:\projects\neusipo_v2.0\platform\struts-2.0.dtd">
+
+<struts>
+
+	<package name="console" extends="wee-default" namespace="/console">
+		
+		<!-- 维护角色信息 begin -->
+		<action name="showRoleAC" class="sysmgr.showRoleAC">
+			<result name="init">/console/page/auth/role/role.jsp</result>
+			<result name="list">/console/page/auth/role/role_user_list.jsp</result>
+			<result name="addList">/console/page/auth/role/user_add_list.jsp</result>
+			<result name="add">/console/page/auth/role/user_add.jsp</result>
+		</action>
+		<action name="maintainRoleAC" class="sysmgr.maintainRoleAC">
+			<result name="init">/console/page/auth/role/role.jsp</result>
+			<result name="list">/console/page/auth/role/role_user_list.jsp</result>
+			<result name="addList">/console/page/auth/role/user_add_list.jsp</result>
+			<result name="add">/console/page/auth/role/user_add.jsp</result>
+		</action>
+		<!-- 维护角色信息 end -->
+
+		<!-- 维护用户信息 begin -->
+		<action name="showUserAC" class="sysmgr.showUserAC">
+			<result name="userList">/console/page/org/user/user_list.jsp</result>
+			<result name="content_show">/console/page/org/user/user_detail.jsp</result>
+			<result name="content_add">/console/page/org/user/user_add.jsp</result>
+			<result name="content_edit">/console/page/org/user/user_editor.jsp</result>
+		</action>
+		<action name="maintainUserAC" class="sysmgr.maintainUserAC">
+			<result name="content_add">/console/page/org/user/user_add.jsp</result>
+			<result name="content_edit">/console/page/org/user/user_editor.jsp</result>
+		</action>
+		<action name="showUnitAC" class="sysmgr.showUnitAC">
+			<result name="unitTree">/console/page/org/user/unit_user.jsp</result>
+		</action>
+		<action name="maintainUnitAC" class="sysmgr.maintainUnitAC">
+		</action>
+		<!-- 维护用户信息 end -->
+
+
+		<!-- 维护权限信息 begin -->
+		<action name="showPrivilegeAC" class="sysmgr.PrivilegeAC">
+			<result name="list">/console/page/auth/privilege/privilege.jsp</result>
+		</action>
+		<!-- 维护权限信息 end -->
+		
+		<!--  资源接口配置 begin-->
+		<action name="showResourceAC" class="sysmgr.showResourceAC">
+			<result name="resource">/console/page/auth/resource/resource.jsp</result>
+			<result name="resource_editor">/console/page/auth/resource/resource_editor.jsp</result>
+			<result name="url_list">/console/page/auth/resource/url_list.jsp</result>		
+			<result name="url_editor">/console/page/auth/resource/url_editor.jsp</result>
+		</action>
+		<action name="maintainResourceAC" class="sysmgr.maintainResourceAC">
+			<result name="resource">/console/page/auth/resource/resource.jsp</result>
+			<result name="resource_editor">/console/page/auth/resource/resource_editor.jsp</result>
+			<result name="url_list">/console/page/auth/resource/url_list.jsp</result>			
+			<result name="url_editor">/console/page/auth/resource/url_editor.jsp</result>
+		</action>
+		<!-- 资源接口配置 end -->
+		<!-- 菜单维护配置 begin-->
+		<action name="showMenuAC" class="sysmgr.showMenuAC">
+			<result name="menuMsg">/console/page/auth/menu/menu.jsp</result>
+		</action>
+		<action name="showMenuMgrAC" class="sysmgr.showMenuMgrAC">
+			<result name="menuMsg">/console/page/auth/menu/menu.jsp</result>
+		</action>
+		<action name="maintainMenuMgrAC" class="sysmgr.maintainMenuMgrAC">
+			<result name="menuMsg">/console/page/auth/menu/menu.jsp</result>
+		</action>
+		<!-- 菜单维护配置 end-->
+		
+		<!-- 用户操作日志 begin-->
+		<action name="showBizLogAC" class="sysmgr.showBizLogAC">
+			<result name="showbizlog">/console/page/bizlog/bizlog.jsp</result>
+			<result name="showbizlogdetail">/console/page/bizlog/bizlog_detail.jsp</result>
+			<result name="excel">/console/page/bizlog/bizlog.jsp</result>
+		</action>
+		<action name="exportBizLogAC" class="sysmgr.exportBizLogAC">
+			<result name="excel" type="stream">
+				 <param name="contentType">application/octet-stream;charset=UTF-8</param>
+				 <param name="contentDisposition">attachment;filename="${downFileName}"</param>
+				 <param name="inputName">excelStream</param>
+			</result>
+		</action>
+		<!-- 用户操作日志 end-->
+		
+	</package>
+
+</struts>

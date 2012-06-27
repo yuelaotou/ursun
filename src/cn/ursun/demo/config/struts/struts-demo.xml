@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="demo" extends="wee-default" namespace="/demo">
+		<action name="demoShowAC" class="demo.DemoShowAC">
+		    <result name="grid">/demo/page/wee_tag_demo/grid.jsp</result>
+		</action>
+		<action name="pageAC" class="demo.PageAC">
+			<result name="page">/demo/page/wee_tag_demo/page.jsp</result>
+			<result name="pageSub">/demo/page/wee_tag_demo/pageSub.jsp</result>
+		</action>
+		
+		
+		<action name="fusionPie" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testPie">
+			<result name="charts">/demo/page/report/pie3d.jsp</result>
+		</action>
+		<action name="fusionPie2d" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testPie">
+			<result name="charts">/demo/page/report/pie2d.jsp</result>
+		</action>
+		<action name="fusionBar" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testBar">
+			<result name="charts">/demo/page/report/Chart.jsp</result>
+		</action>
+		<action name="fusion3DBar" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testCombin">
+			<result name="charts">/demo/page/report/mscombin3d.jsp</result>
+		</action>
+		<action name="fusionLine" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testLine">
+			<result name="charts">/demo/page/report/line.jsp</result>
+		</action>
+		<action name="fusionStack" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testStack">
+			<result name="charts">/demo/page/report/stacked3d.jsp</result>
+		</action>
+		<action name="fusionStack2D" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testStack">
+			<result name="charts">/demo/page/report/stacked2d.jsp</result>
+		</action>
+		<action name="line3D" class="cn.ursun.platform.ps.report.FusionChartDemoAction" method="testLine3D">
+			<result name="charts">/demo/page/report/line3D.jsp</result>
+		</action>
+	</package>
+</struts>

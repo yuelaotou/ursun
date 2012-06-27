@@ -1,0 +1,387 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a{
+	color:#000;
+}
+a:hover{
+	color:#1C4FAD;
+}
+/* =========页面字体样式控制 ==========*/
+
+.FontBlueEnglish11 {
+	font-family:Tahoma, "宋体";
+	text-align: left;
+	color: #1352C6;
+	font-size: 11pt;
+}
+
+.Font11Blue {
+	font-family: "宋体";
+	font-size: 11pt;
+	color: #1352C6;
+
+}
+
+.Font16Black {
+	font-family: "宋体";
+	font-weight:bold;
+	font-size: 16pt;
+	color: #00000;
+
+}
+
+.FontRedEnglish9 {
+	font-family:Tahoma, "宋体";
+	text-align: left;
+	color: #C10000;
+	font-size: 9pt;
+}
+.FontBlackEnglish9 {
+	font-family:Tahoma, "宋体";
+	text-align: left;
+	color: #000000;
+	font-size: 9pt;
+}
+
+.Font9Black {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	font-weight: normal;
+
+}
+
+.Font9Gray {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #7F7F7F;
+}
+
+.Font9Blue {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #6AA1D9;
+}
+
+.Font9BlueA {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #1C4FAD;
+}
+.Font9BlueBold {
+	font-family: "宋体";
+	font-size: 9pt;
+	font-weight:bold;
+	color: #0055AB;
+}
+.Font9BlackBold {
+	font-family: "宋体";
+	font-size: 9pt;
+	font-weight:bold;
+	color: #000000;
+}
+
+
+.Font11Black {
+	font-family: "宋体";
+	font-size: 11pt;
+	color: #000000;
+	font-weight:bold;
+}
+
+/*========Input输入项样式单定义========*/
+
+.InputBlueBorder {
+	font-size: 9pt;
+	color: #5C8EBB;
+	text-decoration: none;
+	height: 14px;
+	border: 1px solid #A6C4E3;
+	font-family: "宋体";
+	height:20px;
+	padding-top:3px;
+}
+.InputBlueBorder2 {
+	font-size: 9pt;
+	color: #5C8EBB;
+	text-decoration: none;
+	height: 14px;
+	border: 1px solid #A6C4E3;
+	font-family: "宋体";
+	height:12px;
+	padding-top:3px;
+}
+
+.InputGrayBorder {
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	height: 14px;
+	border: 1px solid #D5D5D5;
+	font-family: "宋体";
+}
+
+.InputTop1 {
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	height: 16px;
+	font-family: "宋体";
+	border: #FFFFFF;
+
+}
+.InputTop2 {
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	height: 15px;
+	width: 280px;
+	font-family:Tahoma, "宋体";
+}
+
+/*============页面超链接设置=============*/
+
+.ALink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.ALink:link		{ text-decoration:none; font-size: 9pt; color: #000000}
+.ALink:alink	{ text-decoration:none; font-size: 9pt; color: #000000}
+.ALink:visited	{ text-decoration:none; font-size: 9pt; color: #000000}
+.ALink:active	{ text-decoration:none; font-size: 9pt; color: #000000}
+.ALink:hover	{ text-decoration:none; font-weight: bold; font-size: 9pt; color: #E20000}
+
+.BLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.BLink:link		{ text-decoration:none; font-weight: bold; font-size: 9pt; color: #E20000}
+.BLink:alink	{ text-decoration:none; font-weight: bold; font-size: 9pt; color: #E20000}
+.BLink:visited	{ text-decoration:none; font-weight: bold; font-size: 9pt; color: #E20000}
+.BLink:active	{ text-decoration:none;  font-weight: bold; font-size: 9pt; color: #E20000}
+.BLink:hover	{ text-decoration:none; font-weight: bold; font-size: 9pt; color: #E20000}
+
+.CLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.CLink:link		{ text-decoration:none; font-size: 9pt; color: #5C8EBB}
+.CLink:alink	{ text-decoration:none; font-size: 9pt; color: #5C8EBB}
+.CLink:visited	{ text-decoration:none; font-size: 9pt; color: #5C8EBB}
+.CLink:active	{ text-decoration:none; font-size: 9pt; color: #5C8EBB}
+.CLink:hover	{ text-decoration:none; font-size: 9pt; color: #ff0000}
+
+.DLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.DLink:link		{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.DLink:alink	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.DLink:visited	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.DLink:active	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.DLink:hover	{ text-decoration:none; font-size: 9pt; color: #ff0000}
+
+.ELink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.ELink:link		{ text-decoration:none; font-size: 9pt; color: #0000CC}
+.ELink:alink	{ text-decoration:none; font-size: 9pt; color: #0000CC}
+.ELink:visited	{ text-decoration:none; font-size: 9pt; color: #0000CC}
+.ELink:active	{ text-decoration:none; font-size: 9pt; color: #0000CC}
+.ELink:hover	{ text-decoration:none; font-size: 9pt; color: #0000CC}
+
+.FLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.FLink:link		{ text-decoration:none; font-weight:bold; font-size: 9pt; color: #0079C0}
+.FLink:alink	{ text-decoration:none;	font-weight:bold; font-size: 9pt; color: #0079C0}
+.FLink:visited	{ text-decoration:none;	font-weight:bold; font-size: 9pt; color: #0079C0}
+.FLink:active	{ text-decoration:none;	font-weight:bold; font-size: 9pt; color: #0079C0}
+.FLink:hover	{ text-decoration:none;	font-weight:bold; font-size: 9pt; color: #0079C0}
+
+.GLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.GLink:link		{ text-decoration:none; font-size: 9pt; color: #0079C0}
+.GLink:alink	{ text-decoration:none; font-size: 9pt; color: #0079C0}
+.GLink:visited	{ text-decoration:none; font-size: 9pt; color: #0079C0}
+.GLink:active	{ text-decoration:none; font-size: 9pt; color: #0079C0}
+.GLink:hover	{ text-decoration:none; font-weight:bold; font-size: 9pt; color: #0079C0}
+
+.HLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.HLink:link		{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.HLink:alink	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.HLink:visited	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.HLink:active	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+.HLink:hover	{ text-decoration:none; font-size: 9pt; color: #7F7F7F}
+
+.ILink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.ILink:link		{ text-decoration:none; font-size: 9pt; color: #1C4FAD}
+.ILink:alink	{ text-decoration:none; font-size: 9pt; color: #1C4FAD}
+.ILink:visited	{ text-decoration:none; font-size: 9pt; color: #1C4FAD}
+.ILink:active	{ text-decoration:none; font-size: 9pt; color: #1C4FAD}
+.ILink:hover	{ text-decoration:none; font-size: 9pt; color: #1C4FAD}
+
+.ZLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.ZLink:link		{ text-decoration:underline; font-size: 9pt; color: #1C4FAD}
+.ZLink:alink	{ text-decoration:underline; font-size: 9pt; color: #1C4FAD}
+.ZLink:visited	{ text-decoration:underline; font-size: 9pt; color: #1C4FAD}
+.ZLink:active	{ text-decoration:underline; font-size: 9pt; color: #1C4FAD}
+.ZLink:hover	{ text-decoration:underline; font-size: 9pt; color: #ff0000}
+
+.TabLink          {font-family: "宋体", "Arial Narrow", "Times New Roman"; font-size: 9pt;}
+.TabLink:link		{ text-decoration:none; font-size: 9pt; color: #000000}
+.TabLink:alink	{ text-decoration:none; font-size: 9pt; color: #000000}
+.TabLink:visited	{ text-decoration:none; font-size: 9pt; color: #000000}
+.TabLink:active	{ text-decoration:none; font-size: 9pt; color: #000000}
+.TabLink:hover	{ text-decoration:none; font-size: 9pt; color: #000000}
+
+/*============列表色彩设置=============*/
+
+.TableLineColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #B9CADE;
+        padding:0px;
+}
+
+.TableTitleColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	font-weight:bold;
+	color: #0055AB;
+	background-color: #DFEAF6;
+}
+.TableTitleColorA {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #0055AB;
+	background-color: #DFEAF6;
+}
+
+
+.TableTitleBackground {
+	font-family: "宋体";
+	font-size: 9pt;
+	color:#0055AB;
+	font-weight:bold;
+	background-image: url(../images/tabletitle_blue_bk.gif);
+}
+.TableTitleBackgroundA {
+	font-family: "宋体";
+	color:#0079BC;
+	font-size: 9pt;
+	font-weight:bold;
+	background-image: url(../images/tabletitle_bk.gif);
+}
+
+.TableTitleBlueBackground {
+	font-family: "宋体";
+	color:#000000;
+	font-size: 9pt;
+	font-weight:normal;
+	background-image: url(../images/tabletitle_blue_bkA.gif);
+}
+
+.TableTitleGrayBackground {
+	font-family: "宋体";
+	color:#000000;
+	font-size: 9pt;
+	font-weight:bold;
+	background-image: url(../images/tabletitle_gray_bk.gif);
+}
+
+.TableBottomBackground {
+	font-family: "宋体";
+	color:#0079BC;
+	font-size: 9pt;
+	font-weight:bold;
+	background-image: url(../images/tablebottom_blue_bk.gif);
+}
+
+.TableTrColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #F3F7FA;
+	padding:0px;
+}
+.TableTrGrayColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #F8F8F8;
+	padding:5px 5px 5px 10px;
+}
+
+.TableTrColorA {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #F3F7FA;
+}
+
+.TableTdColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #F1E7ED;
+}
+
+.TableTdGrayColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	background-color: #F6F6F6;
+}
+
+
+.vote_result0{
+	background:#4E7BF8;
+}
+.vote_result1{
+	background:#46C6C9;
+}
+.vote_result2{
+	background:#F77539;
+}
+.vote_result3{
+	background:#D114D0;
+}
+.vote_result4{
+	background:#BE96B0;
+}
+.vote_result5{
+	background:#B2B3EC;
+}
+.vote_result6{
+	background:#F7F900;
+}
+.vote_result7{
+	background:#E286B5;
+}
+.vote_result8{
+	background:#AB69B1;
+}
+.vote_result9{
+	background:#678901;
+}
+.tr_over_color{
+	background:#F5ECCD;
+}
+.tr_out_color{
+	background:#F3F7FA;
+}
+.creator_bg{
+	background: #E0EAF6 url(../images/bg.jpg) repeat-x;
+}
+.uploadColor {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	padding:5px 5px 5px 10px;
+}
+.message_title_bg{
+	height:30px;
+	background: #F9F8F9 url(../images/message_bk.gif) repeat-x;
+}
+.message_content_bg{
+	height:160px;
+	background: #F9F8F9;
+	text-align:left;
+	padding-left:20px;
+	padding-right:20px;
+	padding-top:20px;
+	word-break:break-all;
+}
+.BigFont{
+	font-size: 14px;
+	font-weight:bold;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wee-config>
+	<publish>
+		<name>core</name>
+		<root-path>cn.ursun.platform.core</root-path>
+	</publish>
+	<config>
+		<struts-config-file>cn/ursun/platform/core/config/struts/struts-wee.xml</struts-config-file>
+		<spring-config-package>cn/ursun/platform/core/config/spring</spring-config-package>
+		<hibernate-config-package>cn/ursun/platform/core/config/hbm</hibernate-config-package>
+	</config>
+</wee-config>

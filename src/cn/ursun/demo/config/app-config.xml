@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<app-config>
+	<publish>
+		<name>demo</name>
+		<root-path>cn.ursun.demo</root-path>
+	</publish>
+	<config>
+		<struts-config-file>
+		cn/ursun/demo/config/struts/struts-demo.xml
+		</struts-config-file>
+		<spring-config-package>
+		cn/ursun/demo/config/spring
+		</spring-config-package>
+		<hibernate-config-package>
+		cn/ursun/demo/config/hbm
+		</hibernate-config-package>
+	</config>
+</app-config>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

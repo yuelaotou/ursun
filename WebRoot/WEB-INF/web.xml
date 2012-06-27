@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			cn.ursun.platform.core.spring.WeeXmlWebApplicationContext
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>WeePlatformConfigFile</param-name>
+		<param-value>/WEB-INF/config/wee-component-config.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>
+			cn.ursun.platform.core.configloader.WeeConfigLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			cn.ursun.platform.core.spring.WeeContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<!-- Encoding Filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>struts-2-filter</filter-name>
+		<filter-class>
+			cn.ursun.platform.core.struts2.WeeFilterDispatcher
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>
+			Wee_Platform_Security_Filter_Chain_Proxy
+		</filter-name>
+		<filter-class>
+			org.acegisecurity.util.FilterToBeanProxy
+		</filter-class>
+		<init-param>
+			<param-name>targetBean</param-name>
+			<param-value>
+				WeePlatformSecurityFilterChainProxy
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>init</param-name>
+			<param-value>lazy</param-value>
+		</init-param>
+	</filter>
+	
+	
+	<filter-mapping>
+		<filter-name>
+			Wee_Platform_Security_Filter_Chain_Proxy
+		</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>
+			Wee_Platform_Security_Filter_Chain_Proxy
+		</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>
+			Wee_Platform_Security_Filter_Chain_Proxy
+		</filter-name>
+		<url-pattern>/platform/wee_security_check</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>
+			Wee_Platform_Security_Filter_Chain_Proxy
+		</filter-name>
+		<url-pattern>/platform/wee_logout</url-pattern>
+	</filter-mapping>
+	
+	<!-- Encoding Filter Mapping -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Struts 2 Filter Mapping -->
+	<filter-mapping>
+		<filter-name>struts-2-filter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts-2-filter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>
+			org.apache.axis2.transport.http.AxisServlet
+		</servlet-class>
+		<init-param>
+			<param-name>axis2.xml.path</param-name>
+			<param-value>
+				/WEB-INF/classes/cn/ursun/platform/core/config/axis2/axis2.xml
+			</param-value>
+			<!--<param-name>axis2.xml.url</param-name>-->
+			<!--<param-value>http://localhot/myrepo/axis2.xml</param-value>-->
+			<!--<param-name>axis2.repository.path</param-name>-->
+			<!--<param-value>/WEB-INF</param-value>-->
+			<!--<param-name>axis2.repository.url</param-name>-->
+			<!--<param-value>http://localhot/myrepo</param-value>-->
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/servlet/AxisServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>/platform/framework/page/login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/wee-tags</taglib-uri>
+			<taglib-location>
+				/WEB-INF/taglib/wee-tags.tld
+			</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/struts-tags</taglib-uri>
+			<taglib-location>
+				/WEB-INF/taglib/struts-tags.tld
+			</taglib-location>
+		</taglib>
+	</jsp-config>
+</web-app>

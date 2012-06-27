@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 全局DAO配置模板 -->
+	<bean id="consoleDAOProxy" lazy-init="true" class="com.neusoft.wee.core.jdbc.WeeJdbcDAO" abstract="true">
+		<property name="dataSource">
+			<ref bean="consoleDataSource" />
+		</property>
+		<property name="lobHandler">
+			<ref bean="defaultLobHandler" />
+		</property>
+	</bean>
+</beans>

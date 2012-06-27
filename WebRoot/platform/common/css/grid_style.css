@@ -1,0 +1,284 @@
+.gridTable {
+	background-color: #cccccc;
+	cellPadding: 0;
+	cellSpacing: 1;
+	border: 0;
+	width: 100%
+}
+
+.gridHeader {
+	height:28px;
+	background: url(../images/grid/Patents_6.gif) repeat;
+	text-align: center;
+}
+
+.gridRowEven {
+	background-color: #ffffff;
+	text-align: center;
+}
+
+.gridRowOdd {
+	background-color: #ffffff;
+	text-align: center;
+}
+
+.gridPageOfPage {
+	color: #000000;
+	font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+	font-size: 8pt;
+	font-weight: bold;
+	background-color: #ffffff;
+	text-align: center;
+}
+
+.grid_empty_tr {
+	background-color: #ffffff;
+	text-align: center;
+}
+
+.gridPager {
+	float: right;
+	padding-right: 5px;
+	padding-top: 2px;
+	height:20px;
+}
+
+.gridPager p {
+	float: left;
+}
+
+.page span {
+	padding: 0px 6px;
+}
+
+.grid-inner {
+	qdisplay: block;
+	padding: 1px 2px 1px 2px;
+	height: 19px;
+	line-height: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	word-break: keep-all;
+	word-wrap: normal;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	position: relative;
+}
+
+.grid-hd-tool {
+	display: block;
+	position: absolute;
+	z-index: 2;
+	height: 20px;
+	top: 0px;
+	right: 0px;
+}
+
+.grid-hd-tool span {
+	float: left;
+	font-size: 1px;
+}
+
+.grid-hd-icon {
+	left: 0px;
+	width: 11px;
+	height: 10px;
+	background: url(../images/grid/sort_asc_desc.gif) no-repeat;
+	background-position: 11px 11px;
+}
+
+.grid-hd-asc {
+	background-position: 0px 0px;
+}
+
+.grid-hd-desc {
+	background-position: -11px 0px;
+}
+
+.gridGroup {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+.gridEmptyRow {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+.gridEmptyRow TD {
+	font-size: 8pt;
+	text-align: center
+}
+
+.gridQuery {
+	color: #000000;
+	background-color: #FFFFFF;
+	font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+	font-size: 8pt;
+	font-weight: normal;
+	height: 20px
+}
+
+.gridQuery TD:first {
+	width: 100%
+}
+
+.grid-common-button {
+	display: block;
+	float: left;
+	padding: 0px;
+	vertical-align: middle;
+	border: 0px solid #336699;
+	width: 19px;
+	height: 19px;
+	padding: 0px;
+	background-color: transparent;
+	text-decoration: none;
+	margin: 1px;
+	font-size: 1px;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+
+.grid-common-button div      , .gt-common-button button {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	font-size: 1px;
+	border: 0px solid red;
+}
+
+.grid-tool-reload {
+	background: url(../images/grid/tool-reload.gif) no-repeat center center;
+	cursor: pointer;
+}
+
+.group_expand_open_icon {
+	position: relative;
+	left: 0px;
+	width: 20px;
+	height: 9px;
+	float: left;
+	background: url(../images/grid/expand-open.bmp) no-repeat;
+	background-position: 5px 5px;
+}
+
+.group_expand_close_icon {
+	position: relative;
+	left: 0px;
+	width: 20px;
+	height: 9px;
+	float: left;
+	background: url(../images/grid/expand-close.bmp) no-repeat;
+	background-position: 5px 5px;
+}
+
+.grid_group_lable {
+	
+}
+
+.grid_title {
+	font-family: Verdana, Tahoma, Arial, "Sans Serif", "Times New Roman";
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #CBD6E4;
+	padding: 0px;
+	margin: 1px;
+	height: 25px;
+}
+
+.grid_main_body {
+	top: 1 px;
+	padding-top: 0px;
+	margin: 1px;
+}
+
+.grid_query {
+	top: 1px;
+}
+
+.grid_empty {
+	background-color: #ffffff;
+}
+
+.grid_footer {
+	height:28px;
+	background: url(../images/grid/Patents_6.gif) repeat;
+}
+
+
+.grid-toolbar {
+	float: left;
+}
+
+.page_first {
+	display: block;
+	height: 12px;
+	width: 20px;
+	float: left;
+	cursor :hand
+}
+
+.page_first_enable {
+	background: url( "../images/grid/page_1.png") left no-repeat;
+}
+
+.page_first_disable {
+	background: url( "../images/grid/page_5.png") left no-repeat;
+}
+
+.page_previous {
+	display: block;
+	height: 12px;
+	width: 20px;
+	float: left;
+	cursor :hand
+}
+
+.page_previous_enable {
+	background: url( "../images/grid/page_2.png") left no-repeat;
+}
+
+.page_previous_disable {
+	background: url( "../images/grid/page_6.png") left no-repeat;
+}
+
+.page_next {
+	display: block;
+	height: 12px;
+	width: 20px;
+	float: left;
+	cursor :hand
+}
+
+.page_next_enable {
+	background: url( "../images/grid/page_3.png") left no-repeat;
+}
+
+.page_next_disable {
+	background: url( "../images/grid/page_7.png") left no-repeat;
+}
+
+.page_last {
+	display: block;
+	height: 12px;
+	width: 20px;
+	float: left;
+	cursor :hand
+}
+
+.page_last_enable {
+	background: url( "../images/grid/page_4.png") left no-repeat;
+}
+
+.page_last_disable {
+	background: url( "../images/grid/page_8.png") left no-repeat;
+}
+
+.gridColumn {
+	background-color: #ffffff;
+	text-align: center;
+	height: 28px;
+	padding-left: 0px;
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<app-config>
+	<publish>
+		<name>console</name>
+		<root-path>cn.ursun.console</root-path>
+	</publish>
+	<config>
+		<struts-config-file>
+		cn/ursun/console/config/struts/struts-console.xml
+		</struts-config-file>
+		<spring-config-package>
+		cn/ursun/console/config/spring
+		</spring-config-package>
+		<hibernate-config-package>
+		cn/ursun/console/config/hbm
+		</hibernate-config-package>
+	</config>
+</app-config>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

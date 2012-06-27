@@ -1,0 +1,67 @@
+html,body {
+	margin: 0px;
+	height: 100%;
+}
+
+.linkTitle {
+	font-size: 12px;
+	color: #3a6b76;
+	height: 19px;
+	line-height: 19px;
+}
+
+.bottomTitle {
+	font-size: 12px;
+	color: #435255;
+}
+
+.arrowlistmenu {
+	width: 147px;
+	height:100%;
+}
+
+.arrowlistmenu .menuheader {
+	font-size: 12px;
+	font-weight: bold;
+	color: #435255;;
+	background: url(../images/main_34.gif);
+	text-align: center;
+	height: 23px;
+	line-height: 23px;
+	cursor: hand;
+	cursor: pointer;
+}
+
+.arrowlistmenu div {
+	width:145px;
+	border-left:1px solid #add2da;
+	border-right:1px solid #add2da;
+}
+.arrowlistmenu ul li {
+	width:145px;
+	height: 22px;
+	line-height: 22px;
+	font-size: 12px;
+	color: #3a6b76;
+	overflow: auto;
+}
+
+.arrowlistmenu ul li a {
+	color: #3a6b76;
+	background: url(../images/arrowbullet.png) no-repeat 1px 4px;
+	display: block;
+	padding-left: 19px;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: hand;
+	cursor: pointer;
+}
+
+.arrowlistmenu ul li a:visited {
+	color: #41a8bf;
+}
+
+.arrowlistmenu ul li a:hover {
+	color: #41a8bf;
+	background-color: #c3c0c0;
+}

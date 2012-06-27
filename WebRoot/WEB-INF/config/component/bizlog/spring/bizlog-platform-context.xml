@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean parent="weeEventPublisherProxy">
+		<property name="listenerMapper">
+			<map key-type="java.lang.String"
+				value-type="java.lang.List">
+				<entry key="BIZLOG_RECORDS">
+					<list>
+						<ref bean="bizLogDBRecorderListener" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="bizLogAspect"
+		class="cn.ursun.platform.ps.bizlog.aop.BizLogAspect">
+		<property name="propertiesResource">
+			<value>
+				classpath:bizlog-description-resource.properties
+			</value>
+		</property>
+	</bean>
+
+	<bean id="bizLogDBRecorderListener"
+		class="cn.ursun.platform.ps.bizlog.listener.BizLogDBRecorderListener">
+		<property name="bizLogDAO" ref="sysmgr.bizlogDAO" />
+	</bean>
+
+</beans>

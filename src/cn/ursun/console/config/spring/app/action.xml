@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 维护用户信息 begin-->
+	<bean id="sysmgr.showUserAC"
+		class="cn.ursun.console.app.console.user.action.ShowUserAC"
+		scope="prototype">
+		<property name="userBS">
+			<ref bean="sysmgr.userBSTrans" />
+		</property>
+		<property name="roleBS">
+			<ref bean="sysmgr.roleBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.maintainUserAC"
+		class="cn.ursun.console.app.console.user.action.MaintainUserAC"
+		scope="prototype">
+		<property name="userBS">
+			<ref bean="sysmgr.userBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.showUnitAC"
+		class="cn.ursun.console.app.console.unit.action.ShowUnitAC"
+		scope="prototype">
+		<property name="unitBS">
+			<ref bean="sysmgr.unitBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.maintainUnitAC"
+		class="cn.ursun.console.app.console.unit.action.MaintainUnitAC"
+		scope="prototype">
+		<property name="unitBS">
+			<ref bean="sysmgr.unitBSTrans" />
+		</property>
+	</bean>
+
+	<!-- 维护用户信息 end-->
+	<!-- 维护菜单信息 begin -->
+	<bean id="sysmgr.showMenuAC"
+		class="cn.ursun.console.app.console.menu.action.ShowMenuAC"
+		scope="prototype">
+		<property name="menuBS">
+			<ref bean="sysmgr.menuBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.showMenuMgrAC"
+		class="cn.ursun.console.app.console.menu.action.ShowMenuMgrAC"
+		scope="prototype">
+		<property name="menuBS">
+			<ref bean="sysmgr.menuBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.maintainMenuMgrAC"
+		class="cn.ursun.console.app.console.menu.action.MaintainMenuMgrAC"
+		scope="prototype">
+		<property name="menuBS">
+			<ref bean="sysmgr.menuBSTrans" />
+		</property>
+	</bean>
+	<!-- 维护菜单信息 end -->
+
+
+	<!-- 维护权限信息 begin-->
+	<bean id="sysmgr.PrivilegeAC"
+		class="cn.ursun.console.app.console.privilege.action.PrivilegeAC"
+		scope="prototype">
+		<property name="privilegeBS">
+			<ref bean="sysmgr.privilegeBSTrans" />
+		</property>
+		<property name="roleBS">
+			<ref bean="sysmgr.roleBSTrans" />
+		</property>
+	</bean>
+	<!-- 维护权限信息 end-->
+
+
+	<!-- 维护资源信息 begin -->
+	<bean id="sysmgr.showResourceAC"
+		class="cn.ursun.console.app.console.resource.action.ShowResourceAC"
+		scope="prototype">
+		<property name="resourceBS">
+			<ref bean="sysmgr.resourceBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.maintainResourceAC"
+		class="cn.ursun.console.app.console.resource.action.MaintainResourceAC"
+		scope="prototype">
+		<property name="resourceBS">
+			<ref bean="sysmgr.resourceBSTrans" />
+		</property>
+	</bean>
+	<!-- 维护资源信息 end -->
+
+	<!-- 维护权限信息 begin-->
+	<bean id="sysmgr.showRoleAC"
+		class="cn.ursun.console.app.console.role.action.ShowRoleAC"
+		scope="prototype" lazy-init="false">
+		<property name="roleBS">
+			<ref bean="sysmgr.roleBSTrans" />
+		</property>
+		<property name="userBS">
+			<ref bean="sysmgr.userBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.maintainRoleAC"
+		class="cn.ursun.console.app.console.role.action.MaintainRoleAC"
+		scope="prototype" lazy-init="false">
+		<property name="roleBS">
+			<ref bean="sysmgr.roleBSTrans" />
+		</property>
+	</bean>
+	<!-- 维护权限信息 end-->
+
+	<!-- 用户操作日志 begin-->
+	<bean id="sysmgr.showBizLogAC"
+		class="cn.ursun.console.app.console.bizlog.action.ShowBizLogAC"
+		scope="prototype">
+		<property name="bizlogBS">
+			<ref bean="sysmgr.bizlogBSTrans" />
+		</property>
+	</bean>
+	<bean id="sysmgr.exportBizLogAC"
+		class="cn.ursun.console.app.console.bizlog.action.ExportBizLogAC"
+		scope="prototype">
+		<property name="tempPath"
+			value="D:/xmlcache/BIZLOG_EXCEL_EXPORT/" />
+		<property name="bizlogBS">
+			<ref bean="sysmgr.bizlogBSTrans" />
+		</property>
+	</bean>
+	<!-- 用户操作日志 end-->
+
+</beans>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 缓存实现配置  -->
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>
+				/WEB-INF/config/component/ehcache/cache-with-ehcache-config.xml
+			</value>
+		</property>
+	</bean>
+
+	<bean id="defaultMethodResultCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="cacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>DEFAULT_METHOD_RESULT_CACHE</value>
+		</property>
+	</bean>
+
+
+	<!--  方法拦截  -->
+	<bean id="defaultMethodResultCacheInterceptor"
+		class="cn.ursun.platform.ps.interceptor.MethodResultCacheInterceptor">
+		<property name="cache">
+			<ref local="defaultMethodResultCache" />
+		</property>
+	</bean>
+
+</beans>

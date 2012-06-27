@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!--内存数据库数据源  -->
+	<bean id="memoryDBDataSource"
+		class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean">
+		<property name="uniqueResourceName">
+			<value>memoryDBDataSource</value>
+		</property>
+		<property name="user">
+			<value>${platform.memorydb.username}</value>
+		</property>
+		<property name="url">
+			<value>${platform.memorydb.url}</value>
+		</property>
+		<property name="driverClassName">
+			<value>org.hsqldb.jdbcDriver</value>
+		</property>
+		<property name="poolSize">
+			<value>30</value>
+		</property>
+		<property name="borrowConnectionTimeout">
+			<value>60</value>
+		</property>
+	</bean>
+
+	<bean id="memoryDBDAOProxy" lazy-init="true"
+		class="cn.ursun.platform.core.jdbc.WeeJdbcDAO" abstract="true">
+		<property name="dataSource">
+			<ref bean="memoryDBDataSource" />
+		</property>
+		<property name="lobHandler">
+			<ref bean="defaultLobHandler" />
+		</property>
+	</bean>
+
+	<!-- ============================= 注册内存数据库事件 ============================= -->
+	<bean parent="weeEventPublisherProxy">
+		<property name="listenerMapper">
+			<map key-type="java.lang.String"
+				value-type="java.lang.List">
+				<entry key="MEMEORY_DB_INITIALIZED">
+					<list>
+						<ref bean="memoryDBInitializeCompleteListener" />
+					</list>
+				</entry>
+				<entry key="DB_CHANGED">
+					<list>
+						<ref bean="incrementDBChangedListener" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- ============================= 注册内存数据库组件 ============================= -->
+	<bean parent="componentInitializerProxy">
+		<property name="componentList">
+			<list>
+				<ref bean="memoryDBComponent" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ============================= 注册内存数据库计划任务 ============================= -->
+	<bean parent="weeSchedulerFactoryProxy">
+		<property name="triggers">
+			<list>
+				<ref local="cacheSynchronizerTrigger" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置内存数据库组件，负责初始化源数据库到目标数据库的数据同步 -->
+	<bean id="memoryDBComponent"
+		class="cn.ursun.platform.ps.memorydb.WeeMemoryDBComponent">
+		<property name="databaseSynchronizer">
+			<ref bean="initializeDataDBSynchronizer" />
+		</property>
+	</bean>
+
+	<!-- ============================= 定时任务：定时指定同步缓存与数据库的程序 ============================= -->
+	<!-- 缓存同步器 -->
+	<bean id="cacheSynchronizerQuartzDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="cacheSynchronizer" />
+		<property name="targetMethod" value="process" />
+	</bean>
+	<!-- 缓存同步器定时执行触发器 -->
+	<bean id="cacheSynchronizerTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="cacheSynchronizerQuartzDetail" />
+		<property name="startDelay" value="60000" />
+		<property name="repeatInterval" value="2000" />
+	</bean>
+
+
+	<!-- 配置内存数据库管理器 -->
+	<bean id="memoryDBManager"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.MemoryDBManagerImpl"
+		parent="memoryDBDAOProxy">
+		<property name="scriptResources">
+			<list>
+				<value>
+					WEB-INF/config/component/memorydb/auth-org-memory-db-script.sql
+				</value>
+				<value>
+					WEB-INF/config/component/memorydb/codelist-memory-db-script.sql
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置应用数据库管理器 -->
+	<bean id="weeDBManager"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.WeeDBManager"
+		parent="platformDAOProxy">
+	</bean>
+
+
+	<!-- 配置内存数据同步器基类，注入源数据库管理器和目标数据库管理器 -->
+	<bean id="memoryDBSynchronizer"
+		class="cn.ursun.platform.ps.memorydb.dao.AbstractDatabaseSynchronizer"
+		abstract="true">
+		<property name="sourceDatabaseManager">
+			<ref bean="weeDBManager" />
+		</property>
+		<property name="targetDatabaseManager">
+			<ref bean="memoryDBManager" />
+		</property>
+	</bean>
+
+	<!-- 初始化内存数据库数据 -->
+	<bean id="initializeDataDBSynchronizer"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.SimpleDatabaseSynchronizer"
+		parent="memoryDBSynchronizer">
+		<property name="synchronizingTables">
+			<list>
+				<value>WEE_ORG_ACCOUNT</value>
+				<value>WEE_ORG_USER</value>
+				<value>WEE_ORG_UNIT</value>
+				<value>WEE_ORG_M_USER_UNIT</value>
+				<value>WEE_AUTH_RESOURCE</value>
+				<value>WEE_AUTH_ROLE</value>
+				<value>WEE_AUTH_M_ROLE_RESOURCE</value>
+				<value>WEE_AUTH_M_USER_ROLE</value>
+				<value>WEE_AUTH_URL</value>
+				<value>WEE_AUTH_M_RESOURCE_URL</value>
+				<value>PS_CODE_SUB</value>
+				<value>PS_CODE</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置组织机构数据同步器 -->
+	<bean id="orgDBSynchronizer"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.SimpleDatabaseSynchronizer"
+		parent="memoryDBSynchronizer">
+		<property name="synchronizerType" value="ORG" />
+		<property name="synchronizingTables">
+			<list>
+				<value>WEE_ORG_ACCOUNT</value>
+				<value>WEE_ORG_USER</value>
+				<value>WEE_ORG_UNIT</value>
+				<value>WEE_ORG_M_USER_UNIT</value>
+				<value>WEE_AUTH_RESOURCE</value>
+				<value>WEE_AUTH_ROLE</value>
+				<value>WEE_AUTH_M_ROLE_RESOURCE</value>
+				<value>WEE_AUTH_M_USER_ROLE</value>
+				<value>WEE_AUTH_URL</value>
+				<value>WEE_AUTH_M_RESOURCE_URL</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置代码表数据同步器 -->
+	<bean id="codeDBSynchronizer"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.SimpleDatabaseSynchronizer"
+		parent="memoryDBSynchronizer">
+		<property name="synchronizerType" value="CODE" />
+		<property name="synchronizingTables">
+			<list>
+				<value>PS_CODE_SUB</value>
+				<value>PS_CODE</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- ========================= 配置组织机构工具类，负责从内存数据中读取组织机构信息 =========================== -->
+
+	<bean id="memoryAccountDAO"
+		class="cn.ursun.console.app.dao.impl.AccountDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryPrivilegeDAO"
+		class="cn.ursun.console.app.dao.impl.PrivilegeDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryResourceDAO"
+		class="cn.ursun.console.app.dao.impl.ResourceDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryRoleDAO"
+		class="cn.ursun.console.app.dao.impl.RoleDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryUnitDAO"
+		class="cn.ursun.console.app.dao.impl.UnitDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryUserDAO"
+		class="cn.ursun.console.app.dao.impl.UserDAOImpl"
+		parent="memoryDBDAOProxy" />
+
+	<bean id="memoryAuthFacdeFactory" class="cn.ursun.platform.ps.util.OrgUtils"
+		factory-method="getInstance">
+		<property name="accountDAO" ref="memoryAccountDAO" />
+		<property name="userDAO" ref="memoryUserDAO" />
+		<property name="unitDAO" ref="memoryUnitDAO" />
+		<property name="resourceDAO" ref="memoryResourceDAO" />
+		<property name="privilegeDAO" ref="memoryPrivilegeDAO" />
+		<property name="roleDAO" ref="memoryRoleDAO" />
+		<property name="adminRoleId" value="adminRole" />
+	</bean>
+
+	<!-- ========================= 配置同步缓存与数据库的处理器 =========================== -->
+
+	<!-- 缓存数据同步组件，负责启动同步线程，在指定的时间轮训缓存同步信息，判断是否需要同步缓存 -->
+	<bean id="memoryDBInitializeCompleteListener"
+		class="cn.ursun.platform.ps.memorydb.listener.MemoryDBInitializeCompleteListener">
+		<property name="synchronizerDAO" ref="mdbSynchronizerDAO" />
+	</bean>
+
+	<!-- 负责缓存同步信息访问的DAO -->
+	<bean id="mdbSynchronizerDAO"
+		class="cn.ursun.platform.ps.sync.dao.impl.MDBSyncDAOImpl"
+		parent="platformDAOProxy" />
+
+	<!-- 增量同步缓存数据库 -->
+	<bean id="incrementDatabaseSynchronizer"
+		class="cn.ursun.platform.ps.memorydb.dao.impl.IncrementDatabaseSynchronizer"
+		parent="memoryDBSynchronizer">
+		<property name="synchronizerDAO">
+			<ref bean="mdbSynchronizerDAO" />
+		</property>
+	</bean>
+
+	<bean id="incrementDatabaseSynchronizerTrans"
+		parent="baseTxProxy">
+		<property name="target">
+			<ref local="incrementDatabaseSynchronizer" />
+		</property>
+		<property name="proxyInterfaces">
+			<list>
+				<value>
+					cn.ursun.platform.ps.memorydb.dao.DatabaseSynchronizer
+				</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="cacheSynchronizerDAO"
+		class="cn.ursun.platform.ps.sync.dao.impl.SynchronizerDAOImpl" parent="platformDAOProxy">
+	</bean>
+
+	<!-- 缓存数据同步组件，Schedule定时出发检查缓存同步信息，判断是否需要同步缓存 -->
+	<bean id="cacheSynchronizer"
+		class="cn.ursun.platform.ps.sync.CacheSynchronizer">
+		<property name="synchronizerDAO" ref="cacheSynchronizerDAO" />
+		<property name="synchronizerMapper">
+			<map>
+				<entry key="ORG_REFRESH">
+					<bean
+						class="cn.ursun.platform.ps.sync.synchronizer.impl.MDBCacheSynchronizer">
+						<property name="databaseSynchronizer">
+							<ref bean="orgDBSynchronizer" />
+						</property>
+					</bean>
+				</entry>
+				<entry key="CODELIST_REFRESH">
+					<bean
+						class="cn.ursun.platform.ps.sync.synchronizer.impl.MDBCacheSynchronizer" >
+						<property name="databaseSynchronizer">
+							<ref bean="codeDBSynchronizer" />
+						</property>
+					</bean>
+				</entry>
+				<entry key="MEM_DB">
+					<bean
+						class="cn.ursun.platform.ps.sync.synchronizer.impl.MDBCacheIncrementSynchronizer">
+						<property name="databaseSynchronizer">
+							<ref
+								bean="incrementDatabaseSynchronizerTrans" />
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 数据更新监听器 -->
+	<bean id="incrementDBChangedListener"
+		class="cn.ursun.platform.ps.memorydb.listener.IncrementDBChangedListener">
+		<property name="synchronizerDAO" ref="mdbSynchronizerDAO" />
+	</bean>
+
+	<!-- 刷新同步内存数据库监听器 -->
+	<!-- 组织机构 -->
+	<bean id="orgRefreshListener"
+		class="cn.ursun.platform.ps.memorydb.listener.MemoryDBSourceDataRefreshListener">
+		<property name="contentType">
+			<value>ORG_REFRESH</value>
+		</property>
+		<property name="databaseSynchronizer">
+			<ref bean="orgDBSynchronizer" />
+		</property>
+		<property name="synchronizerDAO">
+			<ref bean="cacheSynchronizerDAO" />
+		</property>
+	</bean>
+
+	<!-- 代码表 -->
+	<bean id="codeListRefreshListener"
+		class="cn.ursun.platform.ps.memorydb.listener.MemoryDBSourceDataRefreshListener">
+		<property name="contentType">
+			<value>CODELIST_REFRESH</value>
+		</property>
+		<property name="databaseSynchronizer">
+			<ref bean="codeDBSynchronizer" />
+		</property>
+		<property name="synchronizerDAO">
+			<ref bean="cacheSynchronizerDAO" />
+		</property>
+	</bean>
+</beans>

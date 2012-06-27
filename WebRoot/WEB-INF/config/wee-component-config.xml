@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wee-config>
+
+	<component name="bizLog" isEnabled="true" description="业务日志" depends="db,event">
+		<spring_file>WEB-INF/config/component/bizlog/spring</spring_file>
+	</component>
+
+	<component name="memorydb" isEnabled="false" description="内存数据库" depends="db,event,scheduler">
+		<spring_file>
+			WEB-INF/config/component/memorydb/memorydb-platform-context.xml
+		</spring_file>
+	</component>
+
+	<component name="security" isEnabled="true" description="安全机制" depends="db">
+		<spring_file>
+			WEB-INF/config/component/security/security-platform-context.xml
+		</spring_file>
+	</component>
+
+	<component name="platform" isEnabled="true" description="Wee平台" depends="db">
+		<struts_file>
+			WEB-INF/config/component/platform/struts-platform.xml
+		</struts_file>
+		<spring_file>
+			WEB-INF/config/component/platform/spring
+		</spring_file>
+	</component>
+
+<!--	<component name="auth" isEnabled="true" description="权限管理" depends="db">-->
+<!--		<struts_file>-->
+<!--			WEB-INF/config/component/auth/struts-permission.xml-->
+<!--		</struts_file>-->
+<!--		<spring_file>WEB-INF/config/component/auth/spring</spring_file>-->
+<!--	</component>-->
+<!---->
+<!--	<component name="demo" isEnabled="true" description="平台示例" depends="db">-->
+<!--		<struts_file>-->
+<!--			WEB-INF/config/component/demo/struts-demo.xml-->
+<!--		</struts_file>-->
+<!--		<spring_file>WEB-INF/config/component/demo/spring</spring_file>-->
+<!--	</component>-->
+
+	<component name="chart" isEnabled="true" description="报表组件" >
+		<struts_file>
+			WEB-INF/config/component/chart/struts-demo.xml
+		</struts_file>
+		<spring_file>WEB-INF/config/component/chart/spring</spring_file>
+	</component>
+
+	<component name="aop" isEnabled="true" description="AOP支持">
+		<spring_file>
+			WEB-INF/config/component/aop/aop-wee-context.xml
+		</spring_file>
+	</component>
+
+	<component name="db" isEnabled="true" description="数据库支持">
+		<spring_file>WEB-INF/config/component/db</spring_file>
+	</component>
+	
+	<component name="event" isEnabled="true" description="事件">
+		<spring_file>WEB-INF/config/component/event</spring_file>
+	</component>
+	
+	<component name="hibernate" isEnabled="true"
+		description="hibernate">
+		<spring_file>WEB-INF/config/component/hibernate</spring_file>
+	</component>
+	
+	<component name="scheduler" isEnabled="true" description="计划任务">
+		<spring_file>WEB-INF/config/component/scheduler</spring_file>
+	</component>
+	
+	<component name="ehcache" isEnabled="true" description="缓存">
+		<spring_file>WEB-INF/config/component/ehcache/cache-app-context.xml</spring_file>
+	</component>
+	
+</wee-config>

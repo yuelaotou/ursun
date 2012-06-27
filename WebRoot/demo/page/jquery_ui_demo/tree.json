@@ -1,0 +1,30 @@
+{root:{
+		key : "root",
+		title : "root-title",
+		isFolder : true,
+		icon:"folder.gif",
+		children : [ {
+			key : "1",
+			title : "Item 1",
+			icon:"document.gif"
+		}, {
+			key : "2",
+			title : "Folder 2",
+			isFolder : true,
+			icon:"folder.gif",
+			children : [ {
+				key : "2.1",
+				title : "Sub-item 2.1",
+				icon:"document.gif"
+			}, {
+				key : "2.2",
+				title : "Sub-item 2.2",
+				icon:"document.gif"
+			}]
+		}, {
+			key : "3",
+			title : "Item 3",
+			icon:"document.gif"
+		}]
+}
+}

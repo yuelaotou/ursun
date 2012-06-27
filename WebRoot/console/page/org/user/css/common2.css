@@ -1,0 +1,34 @@
+/* CSS Document */
+
+body, tr, td, page {
+	font-family:Tahoma, "ËÎÌו";
+	text-align: left;
+	font-size: 12px;
+	background-color:#FFFFFF;
+}
+
+table.outter {
+	width: 60%;
+}
+
+table.outter tr td {
+	background-color: #330099;
+}
+
+table.inner {
+	width: 100%;
+}
+
+table.inner tr th {
+	background-color: #EEE;
+	font-size: 12px;
+}
+
+table.inner tr.odd td {
+	background-color: #FFF;
+}
+
+table.inner tr.even td {
+	background-color: #EEE;
+}/* CSS Document */
+

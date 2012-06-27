@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 缓存实现配置  -->
+	<bean id="login.action.LoginAC" class="cn.ursun.platform.ps.login.action.LoginAC" lazy-init="true"></bean>
+	<bean id="framework.action.HeaderAC" class="cn.ursun.platform.ps.framework.header.action.HeaderAC"></bean>
+	<bean id="framework.action.MainAC" class="cn.ursun.platform.ps.framework.main.action.MainAC"></bean>
+	<bean id="framework.action.MenuAC" class="cn.ursun.platform.ps.framework.menu.action.MenuAC"></bean>
+</beans>

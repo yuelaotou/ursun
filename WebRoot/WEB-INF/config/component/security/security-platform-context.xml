@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="WeePlatformSecurityFilterChainProxy"
+		class="org.acegisecurity.util.FilterChainProxy">
+		<property name="filterInvocationDefinitionSource">
+			<value>
+				PATTERN_TYPE_APACHE_ANT
+				/**=concurrentSessionFilter,httpSessionContextIntegrationFilter,logoutFilter,rememberMeProcessingFilter,anonymousProcessingFilter,weeFormAuthenticationProcessingFilter,exceptionTranslationFilter,securityContextHolderAwareRequestFilter,weeFilterInvocationInterceptor,weeExtendInfoIntegerationFilter
+			</value>
+		</property>
+	</bean>
+
+
+	<!-- 添加用户信息扩展信息 -->
+	<bean id="weeExtendInfoIntegerationFilter"
+		class="cn.ursun.platform.ps.security.WeeExtendInfoIntegerationFilter" />
+
+	<bean id="sessionRegistry"
+		class="org.acegisecurity.concurrent.SessionRegistryImpl" />
+
+	<!-- 判断session是否过期 -->
+	<bean id="concurrentSessionFilter"
+		class="cn.ursun.platform.ps.security.WeeConcurrentSessionFilter">
+		<property name="sessionRegistry">
+			<ref local="sessionRegistry" />
+		</property>
+		<property name="expiredUrl">
+			<value>/platform/login!error.do</value>
+		</property>
+	</bean>
+
+	<bean id="httpSessionContextIntegrationFilter"
+		class="org.acegisecurity.context.HttpSessionContextIntegrationFilter">
+		<property name="allowSessionCreation" value="true" />
+		<property name="forceEagerSessionCreation" value="true" />
+	</bean>
+
+	<bean id="securityContextHolderAwareRequestFilter"
+		class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter">
+	</bean>
+
+	<bean id="rememberMeProcessingFilter"
+		class="org.acegisecurity.ui.rememberme.RememberMeProcessingFilter">
+		<property name="rememberMeServices" ref="rememberMeServices"></property>
+		<property name="authenticationManager"
+			ref="authenticationManager">
+		</property>
+	</bean>
+
+	<bean id="logoutFilter"
+		class="org.acegisecurity.ui.logout.LogoutFilter">
+		<constructor-arg index="0" value="/platform/logout.do" />
+		<constructor-arg>
+			<list>
+				<bean
+					class="org.acegisecurity.ui.logout.SecurityContextLogoutHandler" />
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl">
+			<value>/platform/wee_logout</value>
+		</property>
+	</bean>
+
+	<bean id="rememberMeServices"
+		class="org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices">
+		<property name="tokenValiditySeconds" value="432000"></property>
+		<property name="key" value="neusipo"></property>
+		<property name="userDetailsService"
+			ref="weeUserDetailsService">
+		</property>
+	</bean>
+	<bean id="weeFormAuthenticationProcessingFilter"
+		class="cn.ursun.platform.ps.security.WeeAuthenticationProcessingFilter">
+		<property name="authenticationManager">
+			<ref local="authenticationManager" />
+		</property>
+		<property name="authenticationFailureUrl">
+			<value>/platform/login!error.do?type=0</value>
+		</property>
+		<property name="defaultTargetUrl">
+			<value>/platform/login!success.do</value>
+		</property>
+		<property name="filterProcessesUrl">
+			<value>/platform/wee_security_check</value>
+		</property>
+		<property name="alwaysUseDefaultTargetUrl" value="true" />
+		<property name="rememberMeServices" ref="rememberMeServices"></property>
+	</bean>
+	<!-- anonymous filter -->
+	<bean id="anonymousProcessingFilter"
+		class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+		<property name="key" value="anonymousUser" />
+		<property name="userAttribute"
+			value="ANONYMOUS_USER,sysUserRole" />
+	</bean>
+	<bean id="formAuthenticationProcessingFilterEntryPoint"
+		class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+		<property name="loginFormUrl">
+			<value>/platform/login_point.do</value>
+		</property>
+		<property name="forceHttps" value="false" />
+		<property name="serverSideRedirect" value="false" />
+	</bean>
+
+	<!-- 认证管理器 -->
+	<bean id="authenticationManager"
+		class="org.acegisecurity.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="anonymousAuthenticationProvider" />
+				<ref local="daoAuthenticationProvider" />
+				<ref local="rememberMeAuthenticationProvider" />
+			</list>
+		</property>
+		<property name="sessionController">
+			<bean
+				class="org.acegisecurity.concurrent.ConcurrentSessionControllerImpl">
+				<property name="maximumSessions" value="1" />
+				<property name="exceptionIfMaximumExceeded"
+					value="false" />
+				<property name="sessionRegistry">
+					<ref local="sessionRegistry" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- rememberMe Provider -->
+	<bean id="rememberMeAuthenticationProvider"
+		class="org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider">
+		<property name="key" value="neusipo"></property>
+	</bean>
+	<!-- 以下内容为认证信息提供者的具体内容 -->
+	<!-- anonymous provider -->
+	<bean id="anonymousAuthenticationProvider"
+		class="org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider">
+		<property name="key" value="anonymousUser" />
+	</bean>
+	<!-- DAO provider -->
+	<bean id="daoAuthenticationProvider"
+		class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService">
+			<ref local="weeUserDetailsService" />
+		</property>
+	</bean>
+
+	<!-- UserDetailService -->
+	<bean id="weeUserDetailsService"
+		class="cn.ursun.platform.ps.security.WeeUserDetailService">
+		<property name="authFacade" ref="authFacdeFactory"></property>
+	</bean>
+	<!-- 权限验证异常抛出来的错误 -->
+	<bean id="exceptionTranslationFilter"
+		class="cn.ursun.platform.ps.security.WeeExceptionTranslationFilter">
+		<property name="authenticationEntryPoint">
+			<ref local="formAuthenticationProcessingFilterEntryPoint" />
+		</property>
+		<property name="createSessionAllowed" value="false" />
+		<property name="accessDeniedHandler"
+			ref="accessDeniedHandler">
+		</property>
+	</bean>
+	<!-- 访问受限处理类 -->
+	<bean id="accessDeniedHandler"
+		class="cn.ursun.platform.ps.security.WeeAccessDeniedHandlerImpl">
+		<property name="errorPage"
+			value="/platform/common/page/errors.jsp">
+		</property>
+	</bean>
+	<!-- URL验证过滤器 -->
+	<bean id="weeFilterInvocationInterceptor"
+		class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="objectDefinitionSource">
+			<ref local="objectDefinitionSource" />
+		</property>
+		<property name="authenticationManager">
+			<ref local="authenticationManager" />
+		</property>
+		<property name="accessDecisionManager">
+			<ref local="httpRequestAccessDecisionManager" />
+		</property>
+	</bean>
+	<!-- 查找权限与角色的映射关系 -->
+	<bean id="objectDefinitionSource"
+		class="cn.ursun.platform.ps.security.WeeDBBasedFilterInvocationDefinitionMap">
+	</bean>
+	<!-- 投票决策（只要有一个允许，则允许操作该资源） -->
+	<bean id="httpRequestAccessDecisionManager"
+		class="org.acegisecurity.vote.AffirmativeBased">
+		<property name="decisionVoters">
+			<ref local="roleVoter" />
+		</property>
+	</bean>
+
+	<bean id="roleVoter" class="org.acegisecurity.vote.RoleVoter">
+		<property name="rolePrefix">
+			<value></value>
+		</property>
+	</bean>
+
+	<bean id="authenticationHolder"
+		class="cn.ursun.platform.ps.security.WeeAuthenticationHolder"
+		factory-method="getInstance" init-method="init">
+		<!-- 此处要与anonymousRole保持一致 -->
+		<property name="anonymousRole">
+			<list>
+				<value>ANONYMOUS_USER</value>
+				<value>sysUserRole</value>
+			</list>
+		</property>
+		<property name="adminRole">
+			<list>
+				<value>adminRole</value>
+			</list>
+		</property>
+		<property name="authFacade" ref="authFacdeFactory"></property>
+	</bean>
+
+	<bean id="securityInfoFactory"
+		class="cn.ursun.platform.ps.security.WeeSecurityInfo"
+		factory-method="getInstance">
+		<property name="authFacade" ref="authFacdeFactory"></property>
+	</bean>
+
+</beans>

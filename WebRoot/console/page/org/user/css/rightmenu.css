@@ -1,0 +1,12 @@
+/* CSS Document */
+.cMenu {
+FILTER: alpha(opacity=0);BACKGROUND-COLOR: #D6D3CE;BORDER-BOTTOM: #666666 2px solid; BORDER-LEFT: #E4E4E4 2px solid; BORDER-RIGHT: #666666 2px solid; BORDER-TOP: #E4E4E4 2px solid; COLOR: #000000; CURSOR: default; FONT-SIZE: 9pt; color:#000000;FONT-WEIGHT: normal; LINE-HEIGHT: 20px; POSITION: absolute; VISIBILITY: hidden; WIDTH: 110px
+}
+.menuitems {
+font-size:9pt;
+MARGIN: 2px;
+PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 15px;
+    PADDING-RIGHT: 3px;
+    PADDING-TOP: 0px;
+}

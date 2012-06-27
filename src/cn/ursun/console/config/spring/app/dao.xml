@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 维护角色信息 begin -->
+	<bean id="sysmgr.roleDAO" lazy-init="true" class="cn.ursun.console.app.dao.impl.RoleDAOImpl"
+		parent="consoleDAOProxy" />
+	<!-- 维护角色信息 end -->
+
+	<!-- 维护用户信息 begin -->
+	<bean id="sysmgr.userDAO" lazy-init="true" class="cn.ursun.console.app.dao.impl.UserDAOImpl"
+		parent="consoleDAOProxy">
+	</bean>
+	<bean id="sysmgr.unitDAO" lazy-init="true" class="cn.ursun.console.app.dao.impl.UnitDAOImpl"
+		parent="consoleDAOProxy">
+	</bean>
+	<bean id="sysmgr.accountDAO" lazy-init="true" class="cn.ursun.console.app.dao.impl.AccountDAOImpl"
+		parent="consoleDAOProxy">
+	</bean>
+	<!-- 维护接用户信息 begin -->
+
+	<!-- 维护菜单信息 begin -->
+	<bean id="sysmgr.menuDAO" lazy-init="true" class="cn.ursun.console.app.dao.impl.MenuDAOImpl"
+		parent="consoleDAOProxy">
+	</bean>
+	<!-- 维护菜单信息 end -->
+
+	<!-- 权限DAO -->
+	<bean id="sysmgr.privilegeDAO" lazy-init="true"
+		class="cn.ursun.console.app.dao.impl.PrivilegeDAOImpl" parent="consoleDAOProxy">
+	</bean>
+
+	<!-- 资源接口信息 begin -->
+	<bean id="sysmgr.resourceDAO" lazy-init="true"
+		class="cn.ursun.console.app.dao.impl.ResourceDAOImpl" parent="consoleDAOProxy">
+	</bean>
+	<!-- 资源接口信息 end -->
+	
+	<!-- 用户操作日志 begin-->
+	<bean id="sysmgr.bizlogDAO" lazy-init="true"
+		class="cn.ursun.console.app.dao.impl.BizLogDAOImpl" parent="consoleDAOProxy">
+	</bean>
+	<!-- 用户操作日志 end-->
+	
+</beans>
